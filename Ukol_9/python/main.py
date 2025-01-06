@@ -34,7 +34,7 @@ class Ctenar:
 
     @cislo_prukazky.setter
     def cislo_prukazky(self, value):
-        if value <= 0:
+        if value is None or value <= 0:
             raise ValueError("Číslo průkazky musí být kladné celé číslo.")
         self._cislo_prukazky = value
 
