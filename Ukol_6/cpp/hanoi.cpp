@@ -19,12 +19,14 @@ void provedTah(vector<vector<int>> &veze, Tah &tah) {
     int naIndex = tah.na - 'A';
 
     // Přesuneme disk z věže zIndex na věž naIndex
-    int disk = veze[zIndex].back();
-    veze[zIndex].pop_back();
-    veze[naIndex].push_back(disk);
+    if (!veze[zIndex].empty()) {
+        int disk = veze[zIndex].back();
+        veze[zIndex].pop_back();
+        veze[naIndex].push_back(disk);
 
-    // Aktualizujeme stav věží v tahu
-    tah.stavVezi = veze;
+        // Aktualizujeme stav věží v tahu
+        tah.stavVezi = veze;
+    }
 }
 
 // Funkce pro řešení Hanoiských věží (bez výpisu)
