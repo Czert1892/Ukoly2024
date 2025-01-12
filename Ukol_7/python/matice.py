@@ -9,7 +9,7 @@ def vytvor_matici(n: int, m: int) -> list[list[int]]:
 
 def reprezentace_matice(matice: list[list[int]]) -> str:
     """Vrátí stringovou reprezentaci matice."""
-    return '\n'.join(' '.join(map(str, row)) for row in matice) + '\n'
+    return '\n'.join(' '.join(map(str, row)) for row in matice) + '\n' if matice else ''
 
 
 def soucet_matic(matice1: list[list[int]], matice2: list[list[int]]) -> list[list[int]]:
@@ -22,7 +22,7 @@ def soucet_matic(matice1: list[list[int]], matice2: list[list[int]]) -> list[lis
 
 def nasobeni_matic(matice1: list[list[int]], matice2: list[list[int]]) -> list[list[int]]:
     """Vynásobí dvě matice, pokud je násobení proveditelné."""
-    if len(matice1[0]) != len(matice2):
+    if not matice1 or not matice2 or len(matice1[0]) != len(matice2):
         print("Chyba: Počet sloupců první matice není roven počtu řádků druhé matice.")
         return None
     return [[sum(a * b for a, b in zip(row, col)) for col in zip(*matice2)] for row in matice1]
@@ -30,6 +30,8 @@ def nasobeni_matic(matice1: list[list[int]], matice2: list[list[int]]) -> list[l
 
 def transpozice_matice(matice: list[list[int]]) -> list[list[int]]:
     """Provede transpozici matice."""
+    if not matice or not matice[0]:
+        return [[]]
     return [list(row) for row in zip(*matice)]
 
 

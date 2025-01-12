@@ -42,7 +42,7 @@ if __name__ == "__main__":
     knihovna.registruj_ctenare(ctenar2)
     print(f"Seznam čtenářů: {[str(c) for c in knihovna.ctenari]}")
 
-    # Zrušení registrace čtenáře
+    # Zrušení registrace čtenáři
     knihovna.zrus_registraci_ctenare(ctenar1)
     print(f"Seznam čtenářů po odebrání: {[str(c) for c in knihovna.ctenari]}")
 

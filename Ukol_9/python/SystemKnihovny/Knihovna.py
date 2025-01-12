@@ -1,8 +1,5 @@
 import csv
 import datetime
-from .Kniha import Kniha
-from .Ctenar import Ctenar
-from .Knihovna import Knihovna
 
 def kniha_existuje(funkce):
     """
@@ -23,12 +20,12 @@ def kniha_existuje(funkce):
 class Knihovna:
     def __init__(self, nazev: str):
         self.nazev = nazev
-        self.knihy: list[Kniha] = []
-        self.ctenari: list[Ctenar] = []
+        self.knihy = []
+        self.ctenari = []
         self.vypujcene_knihy = {}
 
     @classmethod
-    def z_csv(cls, soubor: str) -> Knihovna:
+    def z_csv(cls, soubor: str):
         """
         Načte data knihovny ze souboru CSV.
 
@@ -37,6 +34,9 @@ class Knihovna:
         Returns:
             Objekt Knihovna načtený ze souboru.
         """
+        from .Kniha import Kniha
+        from .Ctenar import Ctenar
+
         knihovna = cls("Neznámá knihovna")
         with open(soubor, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
@@ -48,7 +48,7 @@ class Knihovna:
             knihovna.nazev = row.get('nazev_knihovny', "Neznámá knihovna")
         return knihovna
 
-    def pridej_knihu(self, kniha: Kniha):
+    def pridej_knihu(self, kniha):
         """
         Přidá knihu do knihovny.
 
@@ -85,7 +85,7 @@ class Knihovna:
                 results.append(kniha)
         return results
 
-    def registruj_ctenare(self, ctenar: Ctenar):
+    def registruj_ctenare(self, ctenar):
         """
         Zaregistruje čtenáře do knihovny.
 
@@ -94,7 +94,7 @@ class Knihovna:
         """
         self.ctenari.append(ctenar)
 
-    def zrus_registraci_ctenare(self, ctenar: Ctenar):
+    def zrus_registraci_ctenare(self, ctenar):
         """
         Zruší registraci čtenáře v knihovně.
 
@@ -122,7 +122,7 @@ class Knihovna:
         return results
 
     @kniha_existuje
-    def vypujc_knihu(self, isbn: str, ctenar: Ctenar):
+    def vypujc_knihu(self, isbn: str, ctenar):
         """
         Vypůjčí knihu čtenáři.
 
@@ -137,7 +137,7 @@ class Knihovna:
         self.vypujcene_knihy[isbn] = (ctenar, datetime.date.today())
 
     @kniha_existuje
-    def vrat_knihu(self, isbn: str, ctenar: Ctenar):
+    def vrat_knihu(self, isbn: str, ctenar):
         """
         Vrátí knihu.
 
@@ -151,5 +151,5 @@ class Knihovna:
             raise ValueError(f"Kniha s ISBN {isbn} není vypůjčena.")
         del self.vypujcene_knihy[isbn]
 
-    def __str__(self) -> str:
+    def __str__(self):
         return f"Knihovna: {self.nazev}, Knihy: {len(self.knihy)}, Čtenáři: {len(self.ctenari)}"
