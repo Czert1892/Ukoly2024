@@ -49,7 +49,7 @@ if __name__ == "__main__":
     # Vyhledávání knih podle klíčových slov
     print(f"Vyhledávání knih podle klíčových slov: {[str(kniha) for kniha in knihovna.vyhledej_knihu(klicova_slovo='1984')]}")
     
-    # Vyhledávání čtenářů podle klíčových slov
+    # Vyhledávání čtenáře podle klíčových slov
     print(f"Vyhledávání čtenářů podle klíčových slov: {[str(ctenar) for ctenar in knihovna.vyhledej_ctenare(klicova_slovo='Petr')]}")
 
     # Přidání a vypůjčení knihy

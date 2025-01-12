@@ -45,7 +45,7 @@ class Knihovna:
                     knihovna.knihy.append(Kniha(row['nazev'], row['autor'], int(row['rok_vydani']), row['isbn']))
                 elif row['typ'] == 'ctenar':
                     knihovna.ctenari.append(Ctenar(row['jmeno'], row['prijmeni'], int(row['cislo_prukazky'])))
-            knihovna.nazev = row.get('nazev_knihovny', "Neznámá knihovna")
+            knihovna.nazev = row.get("Městská knihovna")
         return knihovna
 
     def pridej_knihu(self, kniha):
