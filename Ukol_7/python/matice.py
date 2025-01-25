@@ -19,6 +19,8 @@ def soucet_matic(matice1: list[list[int]], matice2: list[list[int]]) -> list[lis
 
 def nasobeni_matic(matice1: list[list[int]], matice2: list[list[int]]) -> list[list[int]] | None:
     """Vynásobí dvě matice, pokud je násobení proveditelné."""
+    if not matice1 and not matice2:
+        return []
     if not matice1 or not matice2 or len(matice1[0]) != len(matice2):
         return None
     return [[sum(a * b for a, b in zip(row, col)) for col in zip(*matice2)] for row in matice1]
@@ -27,6 +29,8 @@ def transpozice_matice(matice: list[list[int]]) -> list[list[int]]:
     """Provede transpozici matice."""
     if not matice:
         return []
+    if not matice[0]:
+        return [[]]
     return [list(row) for row in zip(*matice)]
 
 if __name__ == "__main__":
