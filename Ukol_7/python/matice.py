@@ -7,6 +7,8 @@ def vytvor_matici(n: int, m: int) -> list[list[int]]:
 
 def reprezentace_matice(matice: list[list[int]]) -> str:
     """Vrátí stringovou reprezentaci matice."""
+    if not matice:
+        return ""
     return '\n'.join(' '.join(map(str, row)) for row in matice) + '\n'
 
 def soucet_matic(matice1: list[list[int]], matice2: list[list[int]]) -> list[list[int]] | None:
@@ -23,6 +25,8 @@ def nasobeni_matic(matice1: list[list[int]], matice2: list[list[int]]) -> list[l
 
 def transpozice_matice(matice: list[list[int]]) -> list[list[int]]:
     """Provede transpozici matice."""
+    if not matice:
+        return []
     return [list(row) for row in zip(*matice)]
 
 if __name__ == "__main__":
