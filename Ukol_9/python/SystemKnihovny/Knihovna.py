@@ -28,6 +28,7 @@ class Knihovna:
     def z_csv(cls, soubor: str):
         """
         Načte data knihovny ze souboru CSV.
+
         Args:
             soubor: Cesta k souboru CSV.
         Returns:
@@ -36,15 +37,18 @@ class Knihovna:
         from .Kniha import Kniha
         from .Ctenar import Ctenar
 
+        knihovna = cls("Neznámá knihovna")
         with open(soubor, newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
-            prvni_radek = next(reader)
-            knihovna = cls(prvni_radek.get("nazev", "Neznámá knihovna"))
+            reader = csv.reader(csvfile)
+            # Načteme první řádek s názvem knihovny
+            knihovna.nazev = next(reader)[0].split(":")[1].strip()
+            # Načteme hlavičku
+            headers = next(reader)
             for row in reader:
-                if row['typ'] == 'kniha':
-                    knihovna.knihy.append(Kniha(row['nazev'], row['autor'], int(row['rok_vydani']), row['isbn']))
-                elif row['typ'] == 'ctenar':
-                    knihovna.ctenari.append(Ctenar(row['jmeno'], row['prijmeni'], int(row['cislo_prukazky'])))
+                if row[0] == 'kniha':
+                    knihovna.knihy.append(Kniha(row[1], row[2], int(row[3]), row[4]))
+                elif row[0] == 'ctenar':
+                    knihovna.ctenari.append(Ctenar(row[5], row[6]))
         return knihovna
 
     def pridej_knihu(self, kniha):
